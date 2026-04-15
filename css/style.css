@@ -5,75 +5,127 @@
     box-sizing: border-box;
 }
 
+/* 引入字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=ZCOOL+QingKe+HuangYou&display=swap');
+
+/* CSS 变量定义 */
+:root {
+    --primary: #FF4757;
+    --secondary: #2F3542;
+    --accent: #FFA502;
+    --dark: #1E1E2E;
+    --light: #F8F9FA;
+    --text: #2C3E50;
+    --text-light: #7F8C8D;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-primary: linear-gradient(135deg, #FF4757 0%, #FF6B81 100%);
+    --gradient-secondary: linear-gradient(135deg, #2F3542 0%, #57606F 100%);
+    --gradient-accent: linear-gradient(135deg, #FFA502 0%, #FF6B35 100%);
+    --gradient-background: linear-gradient(135deg, #1E1E2E 0%, #2C3E50 100%);
+}
+
+/* 全局样式 */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--gradient-background);
+    color: var(--light);
     line-height: 1.6;
     min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 背景装饰 */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 71, 87, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(47, 53, 66, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 165, 2, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5%, 5%) rotate(1deg); }
+    50% { transform: translate(0, 10%) rotate(0deg); }
+    75% { transform: translate(-5%, 5%) rotate(-1deg); }
 }
 
 /* 顶部标题栏 */
 .header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    color: #333;
-    padding: 1rem;
+    background: rgba(30, 30, 46, 0.95);
+    backdrop-filter: blur(20px);
+    color: var(--light);
+    padding: 1.5rem;
     text-align: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid var(--primary);
+    border-radius: 0 0 20px 20px;
 }
 
 .header h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
+    animation: titlePulse 3s ease-in-out infinite;
+    letter-spacing: 2px;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); text-shadow: 0 4px 8px rgba(255, 71, 87, 0.3); }
+    50% { transform: scale(1.05); text-shadow: 0 6px 12px rgba(255, 71, 87, 0.5); }
 }
 
 /* 游戏容器 */
 .game-container {
-    margin-top: 5rem;
-    padding: 1.5rem;
+    margin-top: 9rem;
+    padding: 2rem;
     min-height: 100vh;
 }
 
 /* 游戏导航 */
 .game-nav {
     display: flex;
-    margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.game-nav:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+    justify-content: center;
 }
 
 .nav-btn {
-    flex: 1;
-    padding: 1.25rem;
+    padding: 1.25rem 2.5rem;
     border: none;
-    background: transparent;
+    background: rgba(47, 53, 66, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
     font-size: 1.1rem;
-    font-weight: 600;
-    color: #666;
+    font-weight: 700;
+    color: var(--light);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    border: 2px solid rgba(255, 71, 87, 0.2);
+    font-family: 'Noto Sans SC', sans-serif;
 }
 
 .nav-btn::before {
@@ -83,52 +135,79 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transition: left 0.3s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 71, 87, 0.3), transparent);
+    transition: left 0.6s ease;
     z-index: 0;
 }
 
-.nav-btn.active::before {
-    left: 0;
+.nav-btn:hover::before {
+    left: 100%;
+}
+
+.nav-btn:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(255, 71, 87, 0.3);
+    border-color: var(--primary);
 }
 
 .nav-btn.active {
+    background: var(--gradient-primary);
     color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(255, 71, 87, 0.4);
+    border-color: var(--primary);
 }
 
 .nav-btn span {
     position: relative;
     z-index: 1;
+    display: inline-block;
+    transition: var(--transition);
 }
 
-.nav-btn:hover:not(.active) {
-    color: #667eea;
+.nav-btn:hover span {
+    transform: scale(1.05);
 }
 
 /* 游戏面板 */
 .game-panel {
     display: none;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: rgba(47, 53, 66, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
-    animation: fadeInUp 0.5s ease-out;
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-primary);
 }
 
 .game-panel.active {
     display: block;
 }
 
-@keyframes fadeInUp {
+@keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(50px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -137,72 +216,119 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid rgba(255, 71, 87, 0.2);
 }
 
 .game-header h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--light);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: 1px;
 }
 
 .rule-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-primary);
     border: none;
     border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.rule-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.rule-btn:hover::before {
+    left: 100%;
 }
 
 .rule-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* 游戏主体 */
 .game-body {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 /* 设置区域 */
 .dice-setting,
-.guess-setting {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: rgba(249, 249, 249, 0.8);
-    border-radius: 12px;
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s ease;
+.guess-setting,
+.truth-setting,
+.roulette-setting,
+.lottery-setting {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.dice-setting::before,
+.guess-setting::before,
+.truth-setting::before,
+.roulette-setting::before,
+.lottery-setting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
 }
 
 .dice-setting:hover,
-.guess-setting:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+.guess-setting:hover,
+.truth-setting:hover,
+.roulette-setting:hover,
+.lottery-setting:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(255, 71, 87, 0.2);
+    border-color: rgba(255, 71, 87, 0.4);
 }
 
 .dice-setting label,
-.guess-setting label {
+.guess-setting label,
+.truth-setting label,
+.roulette-setting label,
+.lottery-setting label {
     display: block;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     font-weight: 600;
-    color: #555;
-    font-size: 1rem;
+    color: var(--light);
+    font-size: 1.1rem;
 }
 
 .guess-setting {
@@ -213,43 +339,52 @@ body {
 
 .guess-setting > div {
     flex: 1;
-    min-width: 140px;
+    min-width: 150px;
 }
 
 /* 输入框 */
 input[type="number"] {
     width: 100%;
-    padding: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: white;
+    padding: 1.25rem;
+    border: 2px solid rgba(255, 71, 87, 0.2);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    transition: var(--transition);
+    background: rgba(30, 30, 46, 0.9);
+    color: var(--light);
+    font-weight: 500;
 }
 
 input[type="number"]:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    transform: translateY(-1px);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.2);
+    transform: translateY(-2px);
+}
+
+input[type="number"]::placeholder {
+    color: rgba(248, 249, 250, 0.5);
 }
 
 /* 按钮 */
 .game-btn {
     width: 100%;
-    padding: 1.25rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.5rem;
+    background: var(--gradient-primary);
     color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    border-radius: var(--radius);
+    font-size: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .game-btn::before {
@@ -259,7 +394,7 @@ input[type="number"]:focus {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.6s ease;
 }
 
@@ -268,13 +403,14 @@ input[type="number"]:focus {
 }
 
 .game-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 35px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .game-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
 }
 
 /* 猜数字输入区域 */
@@ -286,87 +422,145 @@ input[type="number"]:focus {
 
 .guess-input input {
     flex: 1;
+    padding: 1.25rem;
+    border: 2px solid rgba(255, 71, 87, 0.2);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    transition: var(--transition);
+    background: rgba(30, 30, 46, 0.9);
+    color: var(--light);
+    font-weight: 500;
+}
+
+.guess-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.2);
+    transform: translateY(-2px);
 }
 
 .guess-input .game-btn {
     flex-shrink: 0;
     width: auto;
     margin-bottom: 0;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
 }
 
 /* 游戏结果 */
 .game-result {
-    padding: 2rem;
-    background: rgba(249, 249, 249, 0.8);
-    border-radius: 12px;
+    padding: 2.5rem;
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: var(--radius);
     margin-bottom: 1.5rem;
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    min-height: 100px;
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s ease;
+    min-height: 120px;
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    color: var(--light);
+}
+
+.game-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-accent);
 }
 
 .game-result:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(255, 71, 87, 0.2);
+    border-color: rgba(255, 71, 87, 0.4);
 }
 
 /* 游戏统计 */
 .game-stats {
     padding: 1.5rem;
-    background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
-    border-radius: 12px;
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: var(--radius);
     margin-bottom: 1.5rem;
-    font-size: 1rem;
-    color: #555;
-    border: 1px solid #e0f0ff;
+    font-size: 1.1rem;
+    color: var(--light);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
 }
 
 /* 历史记录 */
 .game-history {
-    padding: 1.5rem;
-    background: rgba(249, 249, 249, 0.8);
-    border-radius: 12px;
-    margin-top: 2rem;
-    border: 1px solid #f0f0f0;
+    padding: 2rem;
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: var(--radius);
+    margin-top: 2.5rem;
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-history::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-accent);
 }
 
 .game-history h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #555;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--light);
 }
 
 .history-content {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: white;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    min-height: 50px;
-    border: 1px solid #f0f0f0;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(47, 53, 66, 0.9);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    min-height: 60px;
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    color: var(--light);
 }
 
 .clear-history-btn {
-    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    background: var(--gradient-primary);
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
+    border-radius: var(--radius);
+    padding: 1rem 2rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(244, 67, 54, 0.3);
+    transition: var(--transition);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .clear-history-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* 弹窗 */
@@ -377,12 +571,12 @@ input[type="number"]:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 2rem;
     animation: fadeIn 0.3s ease;
 }
 
@@ -396,24 +590,29 @@ input[type="number"]:focus {
 }
 
 .modal-content {
-    background: white;
-    border-radius: 16px;
+    background: rgba(47, 53, 66, 0.95);
+    border-radius: var(--radius);
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 71, 87, 0.3);
 }
 
 @keyframes slideIn {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(-20px);
+        transform: scale(0.8) translateY(-50px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 }
 
@@ -421,64 +620,75 @@ input[type="number"]:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 16px 16px 0 0;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(255, 71, 87, 0.2);
+    background: var(--gradient-primary);
+    border-radius: var(--radius) var(--radius) 0 0;
     color: white;
 }
 
 .modal-header h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 1.75rem;
+    font-size: 2rem;
     cursor: pointer;
     color: white;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     line-height: 1;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
     transform: rotate(90deg);
 }
 
 .modal-body {
-    padding: 2rem;
-    line-height: 1.7;
+    padding: 2.5rem;
+    line-height: 1.8;
+    color: var(--light);
 }
 
 .modal-body h4 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--light);
 }
 
 .modal-body ul {
     margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .modal-body li {
-    margin-bottom: 0.5rem;
-    color: #555;
+    margin-bottom: 0.75rem;
+    color: rgba(248, 249, 250, 0.7);
 }
 
 .modal-footer {
-    padding: 1.5rem;
-    border-top: 1px solid #f0f0f0;
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 71, 87, 0.2);
     text-align: right;
 }
 
 .modal-footer .game-btn {
     width: auto;
-    padding: 0.75rem 2rem;
+    padding: 1rem 2.5rem;
     margin-bottom: 0;
 }
 
@@ -486,27 +696,29 @@ input[type="number"]:focus {
 .dice-container {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin: 2rem 0;
+    gap: 2rem;
+    margin: 2.5rem 0;
     flex-wrap: wrap;
 }
 
 .dice {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 3px solid #333;
-    border-radius: 12px;
+    width: 100px;
+    height: 100px;
+    background: var(--gradient-primary);
+    border: 3px solid var(--dark);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: white;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(255, 71, 87, 0.4);
+    transition: var(--transition);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .dice::before {
@@ -524,299 +736,184 @@ input[type="number"]:focus {
     left: 100%;
 }
 
+.dice:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 45px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
 .dice.rolling {
-    animation: roll 1s ease-in-out;
+    animation: roll 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes roll {
     0% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(90deg) scale(1.1); }
+    25% { transform: rotate(90deg) scale(1.2); }
     50% { transform: rotate(180deg) scale(1); }
-    75% { transform: rotate(270deg) scale(1.1); }
+    75% { transform: rotate(270deg) scale(1.2); }
     100% { transform: rotate(360deg) scale(1); }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .game-container {
-        padding: 1rem;
-    }
-
-    .game-panel {
-        padding: 1.5rem;
-    }
-
-    .guess-input {
-        flex-direction: column;
-    }
-
-    .guess-input .game-btn {
-        width: 100%;
-    }
-
-    .dice {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-
-    .dice-container {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-
-    .game-header h2 {
-        font-size: 1.25rem;
-    }
-
-    .game-btn {
-        padding: 1rem;
-        font-size: 1rem;
-    }
-
-    .dice {
-        width: 50px;
-        height: 50px;
-        font-size: 1.25rem;
-    }
-
-    .dice-container {
-        gap: 0.75rem;
-    }
-
-    .game-nav {
-        margin-bottom: 1.5rem;
-    }
-
-    .nav-btn {
-        padding: 1rem;
-        font-size: 1rem;
-    }
-}
-
-/* 横屏适配 */
-@media (orientation: landscape) {
-    .game-container {
-        margin-top: 4rem;
-    }
-
-    .game-panel {
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .dice-container {
-        gap: 2rem;
-    }
-
-    .dice {
-        width: 90px;
-        height: 90px;
-        font-size: 2.25rem;
-    }
-}
-
-/* 消息样式 */
-.message {
-    position: fixed;
-    top: 6rem;
-    right: 1rem;
-    padding: 1.25rem;
-    border-radius: 12px;
-    color: white;
-    font-weight: 600;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    max-width: 300px;
-}
-
-.message.success {
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-}
-
-.message.error {
-    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-}
-
-.message.info {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-}
-
-.message.fade-out {
-    animation: fadeOut 0.5s ease-in forwards;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-}
-
-/* 加载动画 */
-.loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.loading.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #667eea;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 历史时间样式 */
-.history-time {
-    font-size: 0.85rem;
-    color: #999;
-    margin-top: 0.75rem;
-    font-style: italic;
-}
-
-/* 结果信息样式 */
-.result-info {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    border: 1px solid #f0f0f0;
-}
-
-.result-info p {
-    margin-bottom: 0.5rem;
 }
 
 /* 真心话大冒险类型按钮 */
 .truth-type-buttons {
     display: flex;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .type-btn {
     flex: 1;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    background: white;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #666;
+    padding: 1rem;
+    border: 2px solid rgba(255, 71, 87, 0.2);
+    border-radius: var(--radius);
+    background: rgba(30, 30, 46, 0.9);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--light);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.type-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 71, 87, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.type-btn:hover::before {
+    left: 100%;
 }
 
 .type-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-primary);
     color: white;
-    border-color: #667eea;
+    border-color: var(--primary);
 }
 
 .type-btn:hover:not(.active) {
-    border-color: #667eea;
-    color: #667eea;
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.2);
 }
 
 /* 参与者输入容器 */
 .participant-input-container {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .participant-input-group {
     display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .participant-input {
     flex: 1;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: white;
+    padding: 1.25rem;
+    border: 2px solid rgba(255, 71, 87, 0.2);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    transition: var(--transition);
+    background: rgba(30, 30, 46, 0.9);
+    color: var(--light);
+    font-weight: 500;
 }
 
 .participant-input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    transform: translateY(-1px);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.2);
+    transform: translateY(-2px);
+}
+
+.participant-input::placeholder {
+    color: rgba(248, 249, 250, 0.5);
 }
 
 .add-participant-btn {
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.25rem 2rem;
+    background: var(--gradient-primary);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.add-participant-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.add-participant-btn:hover::before {
+    left: 100%;
 }
 
 .add-participant-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* 参与者列表 */
 .participant-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
 }
 
 .participant-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient-primary);
     color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    animation: fadeInScale 0.3s ease;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.participant-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.participant-tag:hover::before {
+    left: 100%;
 }
 
 @keyframes fadeInScale {
@@ -834,22 +931,23 @@ input[type="number"]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border: none;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     line-height: 1;
+    flex-shrink: 0;
 }
 
 .remove-participant-btn:hover {
     background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 /* 从历史记录添加按钮 */
@@ -857,77 +955,289 @@ input[type="number"]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border: none;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     line-height: 1;
+    flex-shrink: 0;
 }
 
 .add-from-history-btn:hover {
     background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
-/* 游戏设置区域通用样式 */
-.truth-setting,
-.roulette-setting,
-.lottery-setting {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: rgba(249, 249, 249, 0.8);
-    border-radius: 12px;
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s ease;
-}
-
-.truth-setting:hover,
-.roulette-setting:hover,
-.lottery-setting:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.truth-setting label,
-.roulette-setting label,
-.lottery-setting label {
-    display: block;
-    margin-bottom: 0.75rem;
+/* 消息样式 */
+.message {
+    position: fixed;
+    top: 10rem;
+    right: 2rem;
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius);
+    color: white;
     font-weight: 600;
-    color: #555;
-    font-size: 1rem;
+    z-index: 1000;
+    animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 350px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.lottery-setting input[type="number"] {
-    margin-top: 0.5rem;
+.message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
 }
 
-/* 响应式导航调整 */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.message.success {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.message.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.message.info {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+.message.fade-out {
+    animation: fadeOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* 加载动画 */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(30, 30, 46, 0.95);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.loading.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid rgba(255, 71, 87, 0.2);
+    border-top: 8px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 历史时间样式 */
+.history-time {
+    font-size: 0.9rem;
+    color: rgba(248, 249, 250, 0.6);
+    margin-top: 1rem;
+    font-style: italic;
+    text-align: right;
+}
+
+/* 结果信息样式 */
+.result-info {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    position: relative;
+    overflow: hidden;
+    color: var(--light);
+}
+
+.result-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-accent);
+}
+
+.result-info p {
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
-    .game-nav {
-        flex-wrap: wrap;
+    .game-container {
+        padding: 1.5rem;
+        margin-top: 8rem;
     }
-    
+
+    .game-panel {
+        padding: 2rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .game-header h2 {
+        font-size: 1.75rem;
+    }
+
     .nav-btn {
-        flex: 1 1 50%;
-        padding: 0.75rem;
-        font-size: 0.9rem;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
     }
-    
+
+    .guess-input {
+        flex-direction: column;
+    }
+
+    .guess-input .game-btn {
+        width: 100%;
+    }
+
+    .dice {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .dice-container {
+        gap: 1.5rem;
+    }
+
     .truth-type-buttons {
         flex-direction: column;
+    }
+
+    .modal {
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        max-width: 95%;
+    }
+
+    .message {
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
     }
 }
 
 @media (max-width: 480px) {
+    .game-container {
+        padding: 1rem;
+        margin-top: 7rem;
+    }
+
+    .game-panel {
+        padding: 1.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.75rem;
+    }
+
+    .game-header h2 {
+        font-size: 1.5rem;
+    }
+
     .nav-btn {
         flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .dice {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .dice-container {
+        gap: 1rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-header,
+    .modal-footer {
+        padding: 1.5rem;
+    }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) {
+    .game-container {
+        margin-top: 7rem;
+    }
+
+    .game-panel {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dice-container {
+        gap: 2.5rem;
+    }
+
+    .dice {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
     }
 }
 
@@ -937,7 +1247,10 @@ input[type="number"]:focus {
     .nav-btn,
     .rule-btn,
     .clear-history-btn,
-    .type-btn {
+    .type-btn,
+    .add-participant-btn,
+    .remove-participant-btn,
+    .add-from-history-btn {
         touch-action: manipulation;
     }
     
@@ -945,7 +1258,29 @@ input[type="number"]:focus {
     .nav-btn:active,
     .rule-btn:active,
     .clear-history-btn:active,
-    .type-btn:active {
+    .type-btn:active,
+    .add-participant-btn:active,
+    .remove-participant-btn:active,
+    .add-from-history-btn:active {
         transform: scale(0.95);
     }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(30, 30, 46, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-secondary);
 }
