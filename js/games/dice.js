@@ -17,34 +17,36 @@ const diceGame = {
      * 绑定事件
      */
     bindEvents() {
+        const self = this;
+        
         // 摇骰子按钮点击事件
         document.getElementById('roll-dice').addEventListener('click', () => {
-            this.rollDice();
+            self.rollDice();
         });
 
         // 骰子数量变化事件
-        document.getElementById('dice-count').addEventListener('change', (e) => {
-            this.updateDiceCount(parseInt(e.target.value));
+        document.getElementById('dice-count').addEventListener('change', function(e) {
+            self.updateDiceCount(parseInt(this.value));
         });
 
         // 增加骰子数量按钮点击事件
-        document.getElementById('increase-dice').addEventListener('click', () => {
-            this.updateDiceCount(this.diceCount + 1);
+        document.getElementById('increase-dice').addEventListener('click', function() {
+            self.updateDiceCount(self.diceCount + 1);
         });
 
         // 减少骰子数量按钮点击事件
-        document.getElementById('decrease-dice').addEventListener('click', () => {
-            this.updateDiceCount(this.diceCount - 1);
+        document.getElementById('decrease-dice').addEventListener('click', function() {
+            self.updateDiceCount(self.diceCount - 1);
         });
 
         // 清除历史按钮点击事件
         document.getElementById('clear-dice-history').addEventListener('click', () => {
-            this.clearHistory();
+            self.clearHistory();
         });
 
         // 规则按钮点击事件
         document.querySelector('.rule-btn[data-game="dice"]').addEventListener('click', () => {
-            this.showRules();
+            self.showRules();
         });
     },
 

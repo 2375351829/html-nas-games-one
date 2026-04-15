@@ -468,6 +468,8 @@ body::before {
     display: flex;
     align-items: center;
     gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .quantity-btn {
