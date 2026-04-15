@@ -8,9 +8,68 @@ window.addEventListener('DOMContentLoaded', () => {
     // 绑定游戏切换事件
     bindGameSwitchEvents();
 
+    // 初始化主题切换
+    initThemeSwitcher();
+
     // 添加消息样式
     addMessageStyles();
 });
+
+/**
+ * 初始化主题切换
+ */
+function initThemeSwitcher() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeList = document.getElementById('theme-list');
+    const themeOptions = document.querySelectorAll('.theme-option');
+
+    // 从localStorage加载保存的主题
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    // 切换主题列表显示/隐藏
+    themeToggle.addEventListener('click', () => {
+        themeList.classList.toggle('active');
+    });
+
+    // 点击主题选项
+    themeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const theme = option.dataset.theme;
+            setTheme(theme);
+            localStorage.setItem('theme', theme);
+            themeList.classList.remove('active');
+        });
+    });
+
+    // 点击外部关闭主题列表
+    document.addEventListener('click', (e) => {
+        if (!themeToggle.contains(e.target) && !themeList.contains(e.target)) {
+            themeList.classList.remove('active');
+        }
+    });
+}
+
+/**
+ * 设置主题
+ */
+function setTheme(theme) {
+    document.body.className = `theme-${theme}`;
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // 更新主题切换按钮的图标
+    switch (theme) {
+        case 'dark':
+            themeToggle.textContent = '🌙';
+            break;
+        case 'light':
+            themeToggle.textContent = '☀️';
+            break;
+        case 'white':
+            themeToggle.textContent = '⚪';
+            break;
+    }
+}
 
 /**
  * 绑定游戏切换事件
