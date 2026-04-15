@@ -460,8 +460,47 @@ body::before {
     display: block;
     margin-bottom: 1rem;
     font-weight: 600;
-    color: var(--light);
+    color: var(--text);
     font-size: 1.1rem;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quantity-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.quantity-controls input[type="number"] {
+    width: 120px;
+    text-align: center;
 }
 
 .guess-setting {

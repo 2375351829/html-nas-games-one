@@ -43,7 +43,11 @@
                 <div class="game-body">
                     <div class="dice-setting">
                         <label for="dice-count">骰子数量：</label>
-                        <input type="number" id="dice-count" min="1" max="6" value="1">
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" id="decrease-dice">-</button>
+                            <input type="number" id="dice-count" min="1" max="9" value="1">
+                            <button class="quantity-btn" id="increase-dice">+</button>
+                        </div>
                     </div>
                     <button id="roll-dice" class="game-btn">摇骰子</button>
                     <div id="dice-result" class="game-result"></div>

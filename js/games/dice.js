@@ -24,10 +24,17 @@ const diceGame = {
 
         // 骰子数量变化事件
         document.getElementById('dice-count').addEventListener('change', (e) => {
-            this.diceCount = parseInt(e.target.value) || 1;
-            if (this.diceCount < 1) this.diceCount = 1;
-            if (this.diceCount > 6) this.diceCount = 6;
-            e.target.value = this.diceCount;
+            this.updateDiceCount(parseInt(e.target.value));
+        });
+
+        // 增加骰子数量按钮点击事件
+        document.getElementById('increase-dice').addEventListener('click', () => {
+            this.updateDiceCount(this.diceCount + 1);
+        });
+
+        // 减少骰子数量按钮点击事件
+        document.getElementById('decrease-dice').addEventListener('click', () => {
+            this.updateDiceCount(this.diceCount - 1);
         });
 
         // 清除历史按钮点击事件
@@ -39,6 +46,16 @@ const diceGame = {
         document.querySelector('.rule-btn[data-game="dice"]').addEventListener('click', () => {
             this.showRules();
         });
+    },
+
+    /**
+     * 更新骰子数量
+     */
+    updateDiceCount(count) {
+        this.diceCount = count || 1;
+        if (this.diceCount < 1) this.diceCount = 1;
+        if (this.diceCount > 9) this.diceCount = 9;
+        document.getElementById('dice-count').value = this.diceCount;
     },
 
     /**
@@ -160,7 +177,8 @@ const diceGame = {
         const rulesContent = `
             <h4>游戏规则</h4>
             <ul>
-                <li>选择骰子数量（1-6个）</li>
+                <li>选择骰子数量（1-9个）</li>
+                <li>使用+/-按钮或直接输入数字来调整数量</li>
                 <li>点击"摇骰子"按钮</li>
                 <li>系统会随机生成每个骰子的点数</li>
                 <li>显示所有骰子的点数和总和</li>
