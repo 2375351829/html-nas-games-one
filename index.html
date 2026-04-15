@@ -112,10 +112,16 @@
                 </div>
                 <div class="game-body">
                     <div class="roulette-setting">
-                        <label for="roulette-participants">参与者（用逗号分隔）：</label>
-                        <textarea id="roulette-participants" placeholder="例如：张三,李四,王五"></textarea>
+                        <label>参与者：</label>
+                        <div class="participant-input-container">
+                            <div class="participant-input-group">
+                                <input type="text" class="participant-input" placeholder="输入参与者姓名">
+                                <button class="add-participant-btn" data-game="roulette">添加</button>
+                            </div>
+                            <div id="roulette-participant-list" class="participant-list"></div>
+                        </div>
                     </div>
-                    <button id="spin-roulette" class="game-btn"> spin 轮盘</button>
+                    <button id="spin-roulette" class="game-btn">旋转轮盘</button>
                     <div id="roulette-result" class="game-result"></div>
                 </div>
                 <div class="game-history">
@@ -133,8 +139,14 @@
                 </div>
                 <div class="game-body">
                     <div class="lottery-setting">
-                        <label for="lottery-participants">参与者（用逗号分隔）：</label>
-                        <textarea id="lottery-participants" placeholder="例如：张三,李四,王五"></textarea>
+                        <label>参与者：</label>
+                        <div class="participant-input-container">
+                            <div class="participant-input-group">
+                                <input type="text" class="participant-input" placeholder="输入参与者姓名">
+                                <button class="add-participant-btn" data-game="lottery">添加</button>
+                            </div>
+                            <div id="lottery-participant-list" class="participant-list"></div>
+                        </div>
                         <label for="lottery-winners">获奖人数：</label>
                         <input type="number" id="lottery-winners" min="1" value="1">
                     </div>

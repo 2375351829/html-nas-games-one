@@ -753,25 +753,103 @@ input[type="number"]:focus {
     color: #667eea;
 }
 
-/* 文本区域样式 */
-textarea {
-    width: 100%;
-    padding: 1rem;
+/* 参与者输入容器 */
+.participant-input-container {
+    margin-top: 1rem;
+}
+
+.participant-input-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.participant-input {
+    flex: 1;
+    padding: 0.75rem;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 1rem;
-    font-family: inherit;
-    resize: vertical;
-    min-height: 100px;
     transition: all 0.3s ease;
     background: white;
 }
 
-textarea:focus {
+.participant-input:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     transform: translateY(-1px);
+}
+
+.add-participant-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.add-participant-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* 参与者列表 */
+.participant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.participant-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.remove-participant-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.remove-participant-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
 }
 
 /* 游戏设置区域通用样式 */

@@ -10,12 +10,27 @@ const rouletteGame = {
         this.bindEvents();
         this.loadHistory();
         this.checkRules();
+        this.renderParticipantList();
     },
 
     /**
      * 绑定事件
      */
     bindEvents() {
+        // 添加参与者按钮点击事件
+        document.querySelector('.add-participant-btn[data-game="roulette"]').addEventListener('click', () => {
+            this.addParticipant();
+        });
+
+        // 参与者输入框回车添加
+        document.querySelectorAll('#roulette-game .participant-input').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.addParticipant();
+                }
+            });
+        });
+
         // 旋转轮盘按钮点击事件
         document.getElementById('spin-roulette').addEventListener('click', () => {
             this.spinRoulette();
@@ -33,20 +48,60 @@ const rouletteGame = {
     },
 
     /**
-     * 旋转轮盘
+     * 添加参与者
      */
-    spinRoulette() {
-        const participantsInput = document.getElementById('roulette-participants');
-        const participantsText = participantsInput.value.trim();
+    addParticipant() {
+        const input = document.querySelector('#roulette-game .participant-input');
+        const name = input.value.trim();
 
-        if (!participantsText) {
-            ui.showMessage('请输入参与者名单', 'error');
+        if (!name) {
+            ui.showMessage('请输入参与者姓名', 'error');
             return;
         }
 
-        // 解析参与者名单
-        this.participants = participantsText.split(',').map(p => p.trim()).filter(p => p);
+        if (this.participants.includes(name)) {
+            ui.showMessage('该参与者已存在', 'error');
+            return;
+        }
 
+        this.participants.push(name);
+        input.value = '';
+        this.renderParticipantList();
+    },
+
+    /**
+     * 移除参与者
+     */
+    removeParticipant(name) {
+        this.participants = this.participants.filter(p => p !== name);
+        this.renderParticipantList();
+    },
+
+    /**
+     * 渲染参与者列表
+     */
+    renderParticipantList() {
+        const listContainer = document.getElementById('roulette-participant-list');
+        listContainer.innerHTML = '';
+
+        this.participants.forEach(name => {
+            const tag = document.createElement('div');
+            tag.className = 'participant-tag';
+            tag.innerHTML = `
+                <span>${name}</span>
+                <button class="remove-participant-btn">×</button>
+            `;
+            tag.querySelector('.remove-participant-btn').addEventListener('click', () => {
+                this.removeParticipant(name);
+            });
+            listContainer.appendChild(tag);
+        });
+    },
+
+    /**
+     * 旋转轮盘
+     */
+    spinRoulette() {
         if (this.participants.length < 2) {
             ui.showMessage('至少需要2个参与者', 'error');
             return;
@@ -134,7 +189,9 @@ const rouletteGame = {
         const rulesContent = `
             <h4>游戏规则</h4>
             <ul>
-                <li>在文本框中输入参与者名单，用逗号分隔</li>
+                <li>在输入框中输入参与者姓名，点击"添加"按钮</li>
+                <li>可以添加多个参与者，每个参与者显示为一个标签</li>
+                <li>点击标签右侧的"×"可以删除该参与者</li>
                 <li>点击"旋转轮盘"按钮</li>
                 <li>轮盘会随机选择一个参与者</li>
                 <li>显示中奖者信息</li>
