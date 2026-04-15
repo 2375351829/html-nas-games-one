@@ -19,6 +19,9 @@
         <nav class="game-nav">
             <button class="nav-btn active" data-game="dice"><span>摇骰子</span></button>
             <button class="nav-btn" data-game="guess"><span>猜数字</span></button>
+            <button class="nav-btn" data-game="truth"><span>真心话大冒险</span></button>
+            <button class="nav-btn" data-game="roulette"><span>轮盘游戏</span></button>
+            <button class="nav-btn" data-game="lottery"><span>幸运抽奖</span></button>
         </nav>
 
         <!-- 游戏内容区域 -->
@@ -75,6 +78,75 @@
                     <button id="clear-guess-history" class="clear-history-btn">清除历史</button>
                 </div>
             </div>
+
+            <!-- 真心话大冒险游戏 -->
+            <div id="truth-game" class="game-panel">
+                <div class="game-header">
+                    <h2>真心话大冒险</h2>
+                    <button class="rule-btn" data-game="truth">?</button>
+                </div>
+                <div class="game-body">
+                    <div class="truth-setting">
+                        <label>选择类型：</label>
+                        <div class="truth-type-buttons">
+                            <button class="type-btn active" data-type="all">全部</button>
+                            <button class="type-btn" data-type="truth">真心话</button>
+                            <button class="type-btn" data-type="dare">大冒险</button>
+                        </div>
+                    </div>
+                    <button id="generate-task" class="game-btn">生成任务</button>
+                    <div id="truth-result" class="game-result"></div>
+                </div>
+                <div class="game-history">
+                    <h3>上次记录</h3>
+                    <div id="truth-history" class="history-content"></div>
+                    <button id="clear-truth-history" class="clear-history-btn">清除历史</button>
+                </div>
+            </div>
+
+            <!-- 轮盘游戏 -->
+            <div id="roulette-game" class="game-panel">
+                <div class="game-header">
+                    <h2>轮盘游戏</h2>
+                    <button class="rule-btn" data-game="roulette">?</button>
+                </div>
+                <div class="game-body">
+                    <div class="roulette-setting">
+                        <label for="roulette-participants">参与者（用逗号分隔）：</label>
+                        <textarea id="roulette-participants" placeholder="例如：张三,李四,王五"></textarea>
+                    </div>
+                    <button id="spin-roulette" class="game-btn"> spin 轮盘</button>
+                    <div id="roulette-result" class="game-result"></div>
+                </div>
+                <div class="game-history">
+                    <h3>上次记录</h3>
+                    <div id="roulette-history" class="history-content"></div>
+                    <button id="clear-roulette-history" class="clear-history-btn">清除历史</button>
+                </div>
+            </div>
+
+            <!-- 幸运抽奖游戏 -->
+            <div id="lottery-game" class="game-panel">
+                <div class="game-header">
+                    <h2>幸运抽奖</h2>
+                    <button class="rule-btn" data-game="lottery">?</button>
+                </div>
+                <div class="game-body">
+                    <div class="lottery-setting">
+                        <label for="lottery-participants">参与者（用逗号分隔）：</label>
+                        <textarea id="lottery-participants" placeholder="例如：张三,李四,王五"></textarea>
+                        <label for="lottery-winners">获奖人数：</label>
+                        <input type="number" id="lottery-winners" min="1" value="1">
+                    </div>
+                    <button id="start-lottery" class="game-btn">开始抽奖</button>
+                    <div id="lottery-result" class="game-result"></div>
+                </div>
+                <div class="game-history">
+                    <h3>上次记录</h3>
+                    <div id="lottery-history" class="history-content"></div>
+                    <button id="clear-lottery-history" class="clear-history-btn">清除历史</button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -104,6 +176,9 @@
     <script src="js/games/index.js"></script>
     <script src="js/games/dice.js"></script>
     <script src="js/games/guess.js"></script>
+    <script src="js/games/truth.js"></script>
+    <script src="js/games/roulette.js"></script>
+    <script src="js/games/lottery.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

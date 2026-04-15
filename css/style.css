@@ -722,19 +722,129 @@ input[type="number"]:focus {
     margin-bottom: 0.5rem;
 }
 
+/* 真心话大冒险类型按钮 */
+.truth-type-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.type-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.type-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.type-btn:hover:not(.active) {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+/* 文本区域样式 */
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 游戏设置区域通用样式 */
+.truth-setting,
+.roulette-setting,
+.lottery-setting {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(249, 249, 249, 0.8);
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.truth-setting:hover,
+.roulette-setting:hover,
+.lottery-setting:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.truth-setting label,
+.roulette-setting label,
+.lottery-setting label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 1rem;
+}
+
+.lottery-setting input[type="number"] {
+    margin-top: 0.5rem;
+}
+
+/* 响应式导航调整 */
+@media (max-width: 768px) {
+    .game-nav {
+        flex-wrap: wrap;
+    }
+    
+    .nav-btn {
+        flex: 1 1 50%;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .truth-type-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-btn {
+        flex: 1 1 100%;
+    }
+}
+
 /* 触摸反馈 */
 @media (hover: none) and (pointer: coarse) {
     .game-btn,
     .nav-btn,
     .rule-btn,
-    .clear-history-btn {
+    .clear-history-btn,
+    .type-btn {
         touch-action: manipulation;
     }
     
     .game-btn:active,
     .nav-btn:active,
     .rule-btn:active,
-    .clear-history-btn:active {
+    .clear-history-btn:active,
+    .type-btn:active {
         transform: scale(0.95);
     }
 }
