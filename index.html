@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>酒桌游戏合集</title>
     <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="酒桌游戏合集，包括摇骰子和猜数字等游戏，无需登录，开箱即用">
 </head>
 <body>
     <!-- 顶部标题栏 -->
@@ -16,8 +17,8 @@
     <main class="game-container">
         <!-- 游戏切换导航 -->
         <nav class="game-nav">
-            <button class="nav-btn active" data-game="dice">摇骰子</button>
-            <button class="nav-btn" data-game="guess">猜数字</button>
+            <button class="nav-btn active" data-game="dice"><span>摇骰子</span></button>
+            <button class="nav-btn" data-game="guess"><span>猜数字</span></button>
         </nav>
 
         <!-- 游戏内容区域 -->
@@ -26,7 +27,7 @@
             <div id="dice-game" class="game-panel active">
                 <div class="game-header">
                     <h2>摇骰子</h2>
-                    <button class="rule-btn" data-game="dice">规则</button>
+                    <button class="rule-btn" data-game="dice">?</button>
                 </div>
                 <div class="game-body">
                     <div class="dice-setting">
@@ -47,14 +48,18 @@
             <div id="guess-game" class="game-panel">
                 <div class="game-header">
                     <h2>猜数字</h2>
-                    <button class="rule-btn" data-game="guess">规则</button>
+                    <button class="rule-btn" data-game="guess">?</button>
                 </div>
                 <div class="game-body">
                     <div class="guess-setting">
-                        <label for="guess-min">最小值：</label>
-                        <input type="number" id="guess-min" min="1" value="1">
-                        <label for="guess-max">最大值：</label>
-                        <input type="number" id="guess-max" min="2" value="100">
+                        <div>
+                            <label for="guess-min">最小值：</label>
+                            <input type="number" id="guess-min" min="1" value="1">
+                        </div>
+                        <div>
+                            <label for="guess-max">最大值：</label>
+                            <input type="number" id="guess-max" min="2" value="100">
+                        </div>
                     </div>
                     <button id="start-guess" class="game-btn">开始游戏</button>
                     <div class="guess-input">
@@ -87,6 +92,11 @@
                 <button id="confirm-modal" class="game-btn">知道了</button>
             </div>
         </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
     </div>
 
     <script src="js/utils/storage.js"></script>
