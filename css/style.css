@@ -852,6 +852,29 @@ input[type="number"]:focus {
     transform: scale(1.1);
 }
 
+/* 从历史记录添加按钮 */
+.add-from-history-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.add-from-history-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
 /* 游戏设置区域通用样式 */
 .truth-setting,
 .roulette-setting,

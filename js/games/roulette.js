@@ -10,7 +10,56 @@ const rouletteGame = {
         this.bindEvents();
         this.loadHistory();
         this.checkRules();
+        this.loadParticipants();
         this.renderParticipantList();
+        this.renderParticipantHistory();
+    },
+
+    /**
+     * 从本地存储加载参与者
+     */
+    loadParticipants() {
+        this.participants = storage.getParticipants();
+    },
+
+    /**
+     * 保存参与者到本地存储
+     */
+    saveParticipants() {
+        storage.saveParticipants(this.participants);
+    },
+
+    /**
+     * 渲染参与者历史记录
+     */
+    renderParticipantHistory() {
+        const history = storage.getParticipantHistory();
+        if (history.length > 0) {
+            const listContainer = document.getElementById('roulette-participant-list');
+            const historyContainer = document.createElement('div');
+            historyContainer.className = 'participant-history';
+            historyContainer.innerHTML = `<h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem;">历史参与者</h4>`;
+            
+            const historyTags = document.createElement('div');
+            historyTags.className = 'participant-list';
+            
+            history.forEach(name => {
+                const tag = document.createElement('div');
+                tag.className = 'participant-tag';
+                tag.style.background = 'linear-gradient(135deg, #9575cd 0%, #7e57c2 100%)';
+                tag.innerHTML = `
+                    <span>${name}</span>
+                    <button class="add-from-history-btn">+</button>
+                `;
+                tag.querySelector('.add-from-history-btn').addEventListener('click', () => {
+                    this.addParticipantFromHistory(name);
+                });
+                historyTags.appendChild(tag);
+            });
+            
+            historyContainer.appendChild(historyTags);
+            listContainer.appendChild(historyContainer);
+        }
     },
 
     /**
@@ -66,6 +115,23 @@ const rouletteGame = {
 
         this.participants.push(name);
         input.value = '';
+        this.saveParticipants();
+        storage.saveParticipantHistory(name);
+        this.renderParticipantList();
+        this.renderParticipantHistory();
+    },
+
+    /**
+     * 从历史记录添加参与者
+     */
+    addParticipantFromHistory(name) {
+        if (this.participants.includes(name)) {
+            ui.showMessage('该参与者已存在', 'error');
+            return;
+        }
+
+        this.participants.push(name);
+        this.saveParticipants();
         this.renderParticipantList();
     },
 
@@ -74,6 +140,7 @@ const rouletteGame = {
      */
     removeParticipant(name) {
         this.participants = this.participants.filter(p => p !== name);
+        this.saveParticipants();
         this.renderParticipantList();
     },
 

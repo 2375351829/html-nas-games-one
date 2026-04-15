@@ -96,5 +96,45 @@ const storage = {
      */
     clearGameHistory(gameId) {
         this.removeItem(`game_history_${gameId}`);
+    },
+
+    /**
+     * 保存参与者列表
+     * @param {array} participants - 参与者列表
+     */
+    saveParticipants(participants) {
+        this.setItem('participants', participants);
+    },
+
+    /**
+     * 获取参与者列表
+     * @returns {array} 参与者列表
+     */
+    getParticipants() {
+        return this.getItem('participants') || [];
+    },
+
+    /**
+     * 保存参与者历史记录
+     * @param {string} participant - 参与者姓名
+     */
+    saveParticipantHistory(participant) {
+        const history = this.getParticipantHistory();
+        if (!history.includes(participant)) {
+            history.unshift(participant);
+            // 只保留最近20个参与者
+            if (history.length > 20) {
+                history.pop();
+            }
+            this.setItem('participant_history', history);
+        }
+    },
+
+    /**
+     * 获取参与者历史记录
+     * @returns {array} 参与者历史记录
+     */
+    getParticipantHistory() {
+        return this.getItem('participant_history') || [];
     }
 };
