@@ -75,8 +75,8 @@ function setTheme(theme) {
  * 绑定游戏切换事件
  */
 function bindGameSwitchEvents() {
-    // 导航按钮点击事件
-    document.querySelectorAll('.nav-btn').forEach(btn => {
+    // 游戏卡片点击事件
+    document.querySelectorAll('.game-card').forEach(btn => {
         btn.addEventListener('click', () => {
             const gameId = btn.dataset.game;
             ui.switchGame(gameId);

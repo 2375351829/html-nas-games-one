@@ -21,158 +21,202 @@
         </div>
     </header>
 
-    <!-- 游戏区域 -->
-    <main class="game-container">
-        <!-- 游戏切换导航 -->
-        <nav class="game-nav">
-            <button class="nav-btn active" data-game="dice"><span>摇骰子</span></button>
-            <button class="nav-btn" data-game="guess"><span>猜数字</span></button>
-            <button class="nav-btn" data-game="truth"><span>真心话大冒险</span></button>
-            <button class="nav-btn" data-game="roulette"><span>轮盘游戏</span></button>
-            <button class="nav-btn" data-game="lottery"><span>幸运抽奖</span></button>
-        </nav>
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>让聚会更有趣</h2>
+            <p>无需登录，开箱即用，多种游戏任你选择</p>
+        </div>
+    </section>
 
-        <!-- 游戏内容区域 -->
-        <div class="game-content">
-            <!-- 摇骰子游戏 -->
-            <div id="dice-game" class="game-panel active">
-                <div class="game-header">
-                    <h2>摇骰子</h2>
-                    <button class="rule-btn" data-game="dice">?</button>
-                </div>
-                <div class="game-body">
-                    <div class="dice-setting">
-                        <label for="dice-count">骰子数量：</label>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" id="decrease-dice">-</button>
-                            <input type="number" id="dice-count" min="1" max="9" value="1">
-                            <button class="quantity-btn" id="increase-dice">+</button>
-                        </div>
-                    </div>
-                    <button id="roll-dice" class="game-btn">摇骰子</button>
-                    <div id="dice-result" class="game-result"></div>
-                </div>
-                <div class="game-history">
-                    <h3>上次记录</h3>
-                    <div id="dice-history" class="history-content"></div>
-                    <button id="clear-dice-history" class="clear-history-btn">清除历史</button>
-                </div>
+    <!-- 游戏网格 -->
+    <section class="game-grid">
+        <button class="game-card active" data-game="dice">
+            <div class="game-icon">🎲</div>
+            <h3>摇骰子</h3>
+        </button>
+        <button class="game-card" data-game="guess">
+            <div class="game-icon">🔢</div>
+            <h3>猜数字</h3>
+        </button>
+        <button class="game-card" data-game="truth">
+            <div class="game-icon">🎭</div>
+            <h3>真心话大冒险</h3>
+        </button>
+        <button class="game-card" data-game="roulette">
+            <div class="game-icon">🎯</div>
+            <h3>轮盘游戏</h3>
+        </button>
+        <button class="game-card" data-game="lottery">
+            <div class="game-icon">🎁</div>
+            <h3>幸运抽奖</h3>
+        </button>
+    </section>
+
+    <!-- 游戏内容区域 -->
+    <main class="game-content">
+        <!-- 摇骰子游戏 -->
+        <div id="dice-game" class="game-panel active">
+            <div class="game-header">
+                <h2>摇骰子</h2>
+                <button class="rule-btn" data-game="dice">?</button>
             </div>
-
-            <!-- 猜数字游戏 -->
-            <div id="guess-game" class="game-panel">
-                <div class="game-header">
-                    <h2>猜数字</h2>
-                    <button class="rule-btn" data-game="guess">?</button>
-                </div>
-                <div class="game-body">
-                    <div class="guess-setting">
-                        <div>
-                            <label for="guess-min">最小值：</label>
-                            <input type="number" id="guess-min" min="1" value="1">
-                        </div>
-                        <div>
-                            <label for="guess-max">最大值：</label>
-                            <input type="number" id="guess-max" min="2" value="100">
-                        </div>
+            <div class="game-body">
+                <div class="dice-setting">
+                    <label for="dice-count">骰子数量：</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decrease-dice">-</button>
+                        <input type="number" id="dice-count" min="1" max="9" value="1">
+                        <button class="quantity-btn" id="increase-dice">+</button>
                     </div>
-                    <button id="start-guess" class="game-btn">开始游戏</button>
-                    <div class="guess-input">
-                        <input type="number" id="guess-number" placeholder="请输入猜测的数字">
-                        <button id="submit-guess" class="game-btn">提交</button>
-                    </div>
-                    <div id="guess-result" class="game-result"></div>
-                    <div id="guess-stats" class="game-stats"></div>
                 </div>
-                <div class="game-history">
-                    <h3>上次记录</h3>
-                    <div id="guess-history" class="history-content"></div>
-                    <button id="clear-guess-history" class="clear-history-btn">清除历史</button>
-                </div>
+                <button id="roll-dice" class="game-btn">摇骰子</button>
+                <div id="dice-result" class="game-result"></div>
             </div>
-
-            <!-- 真心话大冒险游戏 -->
-            <div id="truth-game" class="game-panel">
-                <div class="game-header">
-                    <h2>真心话大冒险</h2>
-                    <button class="rule-btn" data-game="truth">?</button>
-                </div>
-                <div class="game-body">
-                    <div class="truth-setting">
-                        <label>选择类型：</label>
-                        <div class="truth-type-buttons">
-                            <button class="type-btn active" data-type="all">全部</button>
-                            <button class="type-btn" data-type="truth">真心话</button>
-                            <button class="type-btn" data-type="dare">大冒险</button>
-                        </div>
-                    </div>
-                    <button id="generate-task" class="game-btn">生成任务</button>
-                    <div id="truth-result" class="game-result"></div>
-                </div>
-                <div class="game-history">
-                    <h3>上次记录</h3>
-                    <div id="truth-history" class="history-content"></div>
-                    <button id="clear-truth-history" class="clear-history-btn">清除历史</button>
-                </div>
+            <div class="game-history">
+                <h3>上次记录</h3>
+                <div id="dice-history" class="history-content"></div>
+                <button id="clear-dice-history" class="clear-history-btn">清除历史</button>
             </div>
+        </div>
 
-            <!-- 轮盘游戏 -->
-            <div id="roulette-game" class="game-panel">
-                <div class="game-header">
-                    <h2>轮盘游戏</h2>
-                    <button class="rule-btn" data-game="roulette">?</button>
-                </div>
-                <div class="game-body">
-                    <div class="roulette-setting">
-                        <label>参与者：</label>
-                        <div class="participant-input-container">
-                            <div class="participant-input-group">
-                                <input type="text" class="participant-input" placeholder="输入参与者姓名">
-                                <button class="add-participant-btn" data-game="roulette">添加</button>
-                            </div>
-                            <div id="roulette-participant-list" class="participant-list"></div>
-                        </div>
-                    </div>
-                    <button id="spin-roulette" class="game-btn">旋转轮盘</button>
-                    <div id="roulette-result" class="game-result"></div>
-                </div>
-                <div class="game-history">
-                    <h3>上次记录</h3>
-                    <div id="roulette-history" class="history-content"></div>
-                    <button id="clear-roulette-history" class="clear-history-btn">清除历史</button>
-                </div>
+        <!-- 猜数字游戏 -->
+        <div id="guess-game" class="game-panel">
+            <div class="game-header">
+                <h2>猜数字</h2>
+                <button class="rule-btn" data-game="guess">?</button>
             </div>
-
-            <!-- 幸运抽奖游戏 -->
-            <div id="lottery-game" class="game-panel">
-                <div class="game-header">
-                    <h2>幸运抽奖</h2>
-                    <button class="rule-btn" data-game="lottery">?</button>
-                </div>
-                <div class="game-body">
-                    <div class="lottery-setting">
-                        <label>参与者：</label>
-                        <div class="participant-input-container">
-                            <div class="participant-input-group">
-                                <input type="text" class="participant-input" placeholder="输入参与者姓名">
-                                <button class="add-participant-btn" data-game="lottery">添加</button>
-                            </div>
-                            <div id="lottery-participant-list" class="participant-list"></div>
-                        </div>
-                        <label for="lottery-winners">获奖人数：</label>
-                        <input type="number" id="lottery-winners" min="1" value="1">
+            <div class="game-body">
+                <div class="guess-setting">
+                    <div>
+                        <label for="guess-min">最小值：</label>
+                        <input type="number" id="guess-min" min="1" value="1">
                     </div>
-                    <button id="start-lottery" class="game-btn">开始抽奖</button>
-                    <div id="lottery-result" class="game-result"></div>
+                    <div>
+                        <label for="guess-max">最大值：</label>
+                        <input type="number" id="guess-max" min="2" value="100">
+                    </div>
                 </div>
-                <div class="game-history">
-                    <h3>上次记录</h3>
-                    <div id="lottery-history" class="history-content"></div>
-                    <button id="clear-lottery-history" class="clear-history-btn">清除历史</button>
+                <button id="start-guess" class="game-btn">开始游戏</button>
+                <div class="guess-input">
+                    <input type="number" id="guess-number" placeholder="请输入猜测的数字">
+                    <button id="submit-guess" class="game-btn">提交</button>
                 </div>
+                <div id="guess-result" class="game-result"></div>
+                <div id="guess-stats" class="game-stats"></div>
+            </div>
+            <div class="game-history">
+                <h3>上次记录</h3>
+                <div id="guess-history" class="history-content"></div>
+                <button id="clear-guess-history" class="clear-history-btn">清除历史</button>
+            </div>
+        </div>
+
+        <!-- 真心话大冒险游戏 -->
+        <div id="truth-game" class="game-panel">
+            <div class="game-header">
+                <h2>真心话大冒险</h2>
+                <button class="rule-btn" data-game="truth">?</button>
+            </div>
+            <div class="game-body">
+                <div class="truth-setting">
+                    <label>选择类型：</label>
+                    <div class="truth-type-buttons">
+                        <button class="type-btn active" data-type="all">全部</button>
+                        <button class="type-btn" data-type="truth">真心话</button>
+                        <button class="type-btn" data-type="dare">大冒险</button>
+                    </div>
+                </div>
+                <button id="generate-task" class="game-btn">生成任务</button>
+                <div id="truth-result" class="game-result"></div>
+            </div>
+            <div class="game-history">
+                <h3>上次记录</h3>
+                <div id="truth-history" class="history-content"></div>
+                <button id="clear-truth-history" class="clear-history-btn">清除历史</button>
+            </div>
+        </div>
+
+        <!-- 轮盘游戏 -->
+        <div id="roulette-game" class="game-panel">
+            <div class="game-header">
+                <h2>轮盘游戏</h2>
+                <button class="rule-btn" data-game="roulette">?</button>
+            </div>
+            <div class="game-body">
+                <div class="roulette-setting">
+                    <label>参与者：</label>
+                    <div class="participant-input-container">
+                        <div class="participant-input-group">
+                            <input type="text" class="participant-input" placeholder="输入参与者姓名">
+                            <button class="add-participant-btn" data-game="roulette">添加</button>
+                        </div>
+                        <div id="roulette-participant-list" class="participant-list"></div>
+                    </div>
+                </div>
+                <button id="spin-roulette" class="game-btn">旋转轮盘</button>
+                <div id="roulette-result" class="game-result"></div>
+            </div>
+            <div class="game-history">
+                <h3>上次记录</h3>
+                <div id="roulette-history" class="history-content"></div>
+                <button id="clear-roulette-history" class="clear-history-btn">清除历史</button>
+            </div>
+        </div>
+
+        <!-- 幸运抽奖游戏 -->
+        <div id="lottery-game" class="game-panel">
+            <div class="game-header">
+                <h2>幸运抽奖</h2>
+                <button class="rule-btn" data-game="lottery">?</button>
+            </div>
+            <div class="game-body">
+                <div class="lottery-setting">
+                    <label>参与者：</label>
+                    <div class="participant-input-container">
+                        <div class="participant-input-group">
+                            <input type="text" class="participant-input" placeholder="输入参与者姓名">
+                            <button class="add-participant-btn" data-game="lottery">添加</button>
+                        </div>
+                        <div id="lottery-participant-list" class="participant-list"></div>
+                    </div>
+                    <label for="lottery-winners">获奖人数：</label>
+                    <input type="number" id="lottery-winners" min="1" value="1">
+                </div>
+                <button id="start-lottery" class="game-btn">开始抽奖</button>
+                <div id="lottery-result" class="game-result"></div>
+            </div>
+            <div class="game-history">
+                <h3>上次记录</h3>
+                <div id="lottery-history" class="history-content"></div>
+                <button id="clear-lottery-history" class="clear-history-btn">清除历史</button>
             </div>
         </div>
     </main>
+
+    <!-- 特性区域 -->
+    <section class="features">
+        <div class="features-container">
+            <h2>游戏特色</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">💾</div>
+                    <h3>数据持久化</h3>
+                    <p>自动保存游戏记录和参与者信息</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h3>多主题切换</h3>
+                    <p>明亮、黑暗、白色三种主题可选</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>响应式设计</h3>
+                    <p>完美适配手机、平板和电脑</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 规则弹窗 -->
     <div id="rule-modal" class="modal">

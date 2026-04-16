@@ -55,8 +55,8 @@ const ui = {
         // 显示选中的游戏面板
         document.getElementById(`${gameId}-game`).classList.add('active');
 
-        // 更新导航按钮状态
-        document.querySelectorAll('.nav-btn').forEach(btn => {
+        // 更新游戏卡片状态
+        document.querySelectorAll('.game-card').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.game === gameId) {
                 btn.classList.add('active');
